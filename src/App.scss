@@ -1,0 +1,145 @@
+
+// break points
+$largeDesktop-media: 1870px;
+$desktop-media: 1181px;
+$tablet-media: 1180px;
+$mobile-media: 767px;
+$small-mobile-media: 320px;
+
+@mixin desktop() {
+  @media all and (min-width: $desktop-media) {
+      @content;
+  }
+}
+
+@mixin tablet() {
+  @media all and (max-width: $tablet-media) {
+      @content;
+  }
+}
+
+@mixin mobile() {
+  @media all and (max-width: $mobile-media) {
+      @content;
+  }
+}
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+body {
+  background-color: #282c34;
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.contentWrap{
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  padding: 25px;
+  box-sizing: border-box;
+  
+  
+  p{
+    margin-top: 0;
+    text-align: left;
+  }
+
+  .dataForm{
+    width: calc(30% - 25px);
+    margin-right: 25px;
+
+    @include tablet{
+      width: 100%;
+      margin-right: 0;
+      margin-bottom: 25px;
+
+    
+    }
+
+
+    .fieldWrap{
+      margin-bottom: 16px;
+
+      textarea{
+        width: 100% !important;
+        box-sizing: border-box;
+  
+      }
+  
+      input{
+        background-color: white;
+        width: 100% !important;
+      }
+
+    }
+
+    .errorWrap{
+      margin: 16px 0;
+    }
+  }
+  .treemapWrap{
+    width: 70%;
+    // height: 500px;
+    height: calc(100vh - 50px - 37px);
+    @include tablet{
+      width: 100%;
+    
+    }
+
+    .treemap{
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      background-color: white;
+  
+  
+      .boxWrap{
+    
+        .box{
+          width: calc(100% - 2px);
+          height: calc(100% - 2px);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+          border: 1px white solid;
+          font-size: 16px;
+  
+          p{
+            margin: 0;
+          }
+    
+        }
+      }
+    }
+
+  }
+
+}
