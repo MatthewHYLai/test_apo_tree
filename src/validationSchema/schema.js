@@ -19,6 +19,23 @@ const schema = yup.object().shape({
     rowNum : yup.number().min(1, "Please enter a positive number.").integer("Must be an Integer").required("Please enter the row number.").typeError("Please enter a number."),
      
  
+    checkDupDataName : yup.string().ensure().when(["data"], {
+        is: (a) => {
+            if (a&&tryParseJSONObject(a)){
+                
+                let valueArr = JSON.parse(a).map(function(item){ return item.name });
+                return valueArr.some(function(item, idx){ 
+                    return valueArr.indexOf(item) != idx 
+                });
+                // return JSON.parse(a).filter((data)=>{
+                //     return data.name.length>50
+                // }).length > 0
+            }else{
+                return false
+            }
+        },
+        then: yup.string().required("The names must be unique")
+    }),
 
     checkDataName : yup.string().ensure().when(["data"], {
         is: (a) => {
@@ -30,7 +47,7 @@ const schema = yup.object().shape({
                 return false
             }
         },
-        then: yup.string().required("The name must be less than 50 characters")
+        then: yup.string().required("The names must be less than 50 characters")
     }),
 
 

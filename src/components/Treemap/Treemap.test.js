@@ -1,8 +1,8 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import Treemap from './index.js';
 
 
-test('treemap should be rendered', () => {
+test('Number of boxes should be the same as number of data', async () => {
     const dummyData = [
         { "name": "A", "weight": 3, "value": -0.02 },
         { "name": "B", "weight": 3, "value": 0.05 },
@@ -15,7 +15,7 @@ test('treemap should be rendered', () => {
 
   render(<Treemap parsedData={dummyData} rowNum={dummyRowNum} />);
 
-  const boxList = screen.findAllByTestId("boxWrap");
+  const boxList =  await waitFor(() => screen.findAllByTestId("boxWrap"));
 
   expect(boxList).toHaveLength(5);
 });

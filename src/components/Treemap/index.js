@@ -43,7 +43,7 @@ function Treemap(props) {
               cloneVar.width = boxWidth-(100*i)
 
               //add id to each data for checking later
-              cloneVar.id = boxWidth-(100*i)+"_"+data.name+"_"+i
+              cloneVar.id = boxWidth-(100*i)+"_"+data.name+"_"+i+"_"+index
               widthList.add(cloneVar)
             }else{
               console.log(i);
@@ -51,19 +51,17 @@ function Treemap(props) {
               clone100.width = 100;
 
               //add id to each data for checking later
-              clone100.id = 100+"_"+data.name+"_"+i
+              clone100.id = 100+"_"+data.name+"_"+i+"_"+index
               widthList.add(clone100)
             }
           }
-
         }else{
-
+          
           // add to widthList if width is less than 100 
           data.width = boxWidth;
           data.id = data.name+"_"+boxWidth;
           console.log("add ori", data)
           widthList.add(data)
-
         }
       })
     }

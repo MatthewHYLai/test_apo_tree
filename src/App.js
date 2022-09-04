@@ -99,8 +99,26 @@ function App() {
           clearErrors("checkRowNum")
           let over50 = false;
           
+          let valueArr = JSON.parse(watch("data")).map(function(item){ return item.name });
+          let hasDup = valueArr.some(function(item, idx){ 
+              return valueArr.indexOf(item) != idx 
+          });
+
+          console.log("hasDup", hasDup);
+          
+          if(hasDup){
+            console.log("has dup");
+            setError("checkDupDataName")
+          }else{
+            console.log("no dup");
+            clearErrors("checkDupDataName")
+            setParsedData(data)
+
+          }
           // check if all data names are less than 50 characters
           JSON.parse(watch("data")).map((obj, index) => {
+
+            
             if (obj.name.length>50){
               over50=true
             }
@@ -265,7 +283,7 @@ function App() {
               <p><label htmlFor="rowNum">Rows: </label></p>
               <TextField
                 name="rowNum"
-                defaultValue={8}
+                defaultValue={3}
                 autoComplete="off"
                 style={{ width: "100%" }}
                 {...register("rowNum")}
@@ -282,7 +300,7 @@ function App() {
           </form>  
           <div className='treemapWrap'>
             <p>Result</p>  
-            <Treemap parsedData={parsedData} rowNum={rowNum}/>
+            <Treemap parsedData={parsedData} rowNum={rowNum} />
             {/* <div className='treemap'>
               {treemapContent}
             </div> */}
